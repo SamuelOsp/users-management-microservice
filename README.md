@@ -185,3 +185,18 @@ Variables requeridas: `BREVO_API_KEY` y `BREVO_FROM_ADDRESS`. El remitente debe 
 verificado en Brevo. Los parametros de resiliencia `BREVO_CONNECT_TIMEOUT`,
 `BREVO_READ_TIMEOUT`, `BREVO_RETRY_*` y `BREVO_CIRCUIT_*` son opcionales y tienen
 valores predeterminados en `application.properties`.
+
+## Pruebas y umbral de cobertura (Guía 5)
+
+`./mvnw verify` corre las pruebas y el `check` de JaCoCo. La CI usa ese mismo comando, así que un cambio que
+baje la cobertura **del 90 % de líneas o del 90 % de ramas** deja la CI en rojo y Render no lo despliega.
+
+| Qué cubren | Dónde |
+|---|---|
+| Dominio, casos de uso y notificaciones | `src/test/java/.../domain`, `.../application` |
+| Adaptador de Brevo: reintentos, circuit breaker y tiempos límite | `.../infrastructure/adapter/email` |
+| API REST y manejo global de errores (400, 401, 404, 409, 500) | `.../infrastructure/entrypoint/rest` |
+| Consola: menú, lectura de datos y los seis manejadores | `.../infrastructure/entrypoint/desktop/cli` |
+
+Los mínimos se cambian con `jacoco.minimum.line` y `jacoco.minimum.branch` en el `pom.xml`. El reporte queda en
+`target/site/jacoco/index.html`.
