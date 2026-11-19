@@ -46,3 +46,7 @@ build/
 
 /spec/
 .env
+
+# Secretos locales. Nunca deben versionarse.
+/.environments/
+/.env
