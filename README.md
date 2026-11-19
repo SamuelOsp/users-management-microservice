@@ -142,3 +142,13 @@ automático de cada commit que llegue a la rama `main`.
 
 Las credenciales nunca deben guardarse en `application.properties` ni en
 `render.yaml`. Para desarrollo local, deben proporcionarse como variables de entorno.
+
+## Base de datos en TiDB Cloud (Guía 4)
+
+El servicio de Render usa TiDB Cloud Starter (AWS N. Virginia, compatible con MySQL). Solo cambia la configuración:
+`DB_HOST`, `DB_PORT=4000`, `DB_USERNAME`, `DB_PASSWORD` y `DB_SSL_MODE=VERIFY_IDENTITY`.
+
+`VERIFY_IDENTITY` cifra la conexión y además comprueba el certificado y el nombre del servidor.
+
+> `schema.sql` crea el administrador inicial con una clave pública. En una base nueva, cambia su correo y su clave
+> **antes** de apuntar a ella un servicio publicado.
