@@ -4,6 +4,16 @@ Aplicación de gestión de usuarios construida con Java 17 y Spring Boot. La API
 
 Spring es el único *composition root*: `Main` inicia el contexto y las dependencias se resuelven mediante configuración y component scanning de Spring.
 
+## Entregas del taller (Sistemas Distribuidos)
+
+| Guía | Informe | Video | Pull request |
+|---|---|---|---|
+| 1. Ejecución local | [Informe (PDF)](docs/informes/informe-guia-1.pdf) | [Video](https://youtu.be/GvP4Pn-z3kg) | [#1](https://github.com/SamuelOsp/users-management-microservice/pull/1) |
+| 2. Base de datos en Aiven | [Informe (PDF)](docs/informes/informe-guia-2.pdf) | [Video](https://youtu.be/GM9FSGmCNGs) | [#2](https://github.com/SamuelOsp/users-management-microservice/pull/2) |
+| 3. Render y CI/CD | [Informe (PDF)](docs/informes/informe-guia-3.pdf) | [Video](https://youtu.be/0L6NBvhurSw) | [#3](https://github.com/SamuelOsp/users-management-microservice/pull/3) |
+| 4. TiDB Cloud | [Informe (PDF)](docs/informes/informe-guia-4.pdf) | [Video](https://youtu.be/kE_SVctF8OM) | [#4](https://github.com/SamuelOsp/users-management-microservice/pull/4) |
+| 5. Correo con Brevo | [Informe (PDF)](docs/informes/informe-guia-5.pdf) | [Video](https://youtu.be/Zr5QuNYwlbY) | [#5](https://github.com/SamuelOsp/users-management-microservice/pull/5) |
+
 ## Verificación
 
 `GET /health` es publico y responde HTTP 200 con los metadatos generados desde
@@ -23,6 +33,8 @@ Indica que la API responde; no comprueba MySQL ni el proveedor de correo.
 En Windows se puede utilizar `mvnw.cmd`.
 
 ## Ejecución local (Guía 1)
+
+Informe: [informe-guia-1.pdf](docs/informes/informe-guia-1.pdf) · Video: https://youtu.be/GvP4Pn-z3kg
 
 Requisitos: JDK 17 o superior, MySQL 8.4 y Git. Maven no hace falta: el proyecto trae Maven Wrapper.
 
@@ -73,6 +85,8 @@ consultar el eliminado (404).
 
 ## Base de datos remota en Aiven (Guía 2)
 
+Informe: [informe-guia-2.pdf](docs/informes/informe-guia-2.pdf) · Video: https://youtu.be/GM9FSGmCNGs
+
 1. Crear un servicio MySQL en https://console.aiven.io (plan Developer).
 2. Crear la base y las tablas en Aiven con el mismo `schema.sql`. Los datos están en *Connection information*:
 
@@ -109,6 +123,8 @@ scripts/medir-latencia.sh http://localhost:8080 50
 | Aiven (North America), desde Colombia | 107,4 ms | 179,8 ms |
 
 ## Integración y despliegue continuos (Guía 3)
+
+Informe: [informe-guia-3.pdf](docs/informes/informe-guia-3.pdf) · Video: https://youtu.be/0L6NBvhurSw
 
 ```
 PR o push a main ──► GitHub Actions (CI) ──► ¿verde? ──► Render construye la imagen Docker y despliega
@@ -166,6 +182,8 @@ Las credenciales nunca deben guardarse en `application.properties` ni en
 
 ## Base de datos en TiDB Cloud (Guía 4)
 
+Informe: [informe-guia-4.pdf](docs/informes/informe-guia-4.pdf) · Video: https://youtu.be/kE_SVctF8OM
+
 El servicio de Render usa TiDB Cloud Starter (AWS N. Virginia, compatible con MySQL). Solo cambia la configuración:
 `DB_HOST`, `DB_PORT=4000`, `DB_USERNAME`, `DB_PASSWORD` y `DB_SSL_MODE=VERIFY_IDENTITY`.
 
@@ -175,6 +193,8 @@ El servicio de Render usa TiDB Cloud Starter (AWS N. Virginia, compatible con My
 > **antes** de apuntar a ella un servicio publicado.
 
 ## Notificaciones por correo con Brevo (Guía 5)
+
+Informe: [informe-guia-5.pdf](docs/informes/informe-guia-5.pdf) · Video: https://youtu.be/Zr5QuNYwlbY
 
 Los correos transaccionales se envian con `POST /v3/smtp/email` de Brevo. La llamada
 se ejecuta fuera del hilo HTTP en el executor `notificationExecutor` y dispone de
